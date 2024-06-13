@@ -1,6 +1,6 @@
 {
   "conventionalCommits.scopes": ["OrHRM"],
-  "cSpell.ignoreWords": ["codegen"],
+  "cSpell.ignoreWords": ["codegen", "tseslint"],
   "yaml.schemas": {
     "https://www.artillery.io/schema.json": []
   },

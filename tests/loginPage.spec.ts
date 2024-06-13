@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { test } from "../pageObjects/myFixtures";
+import { test } from "../pageObjects/customFixtures";
 import { invalidCredentials, validCredentials } from "./testData/credentials";
 import { routes } from "./testData/routes";
 
