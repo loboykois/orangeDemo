@@ -7,7 +7,7 @@ export class LoginPage extends BasePage {
     return routes.authentication;
   }
 
-  constructor(protected readonly page: Page) {
+  public constructor(protected readonly page: Page) {
     super(page);
     this.page = page;
   }
@@ -30,5 +30,11 @@ export class LoginPage extends BasePage {
 
   public async login(): Promise<void> {
     await this.page.getByRole("button", { name: "Login" }).click();
+  }
+
+  public async doLogin(username: string, password: string): Promise<void> {
+    await this.enterUsername(username);
+    await this.enterPassword(password);
+    await this.login();
   }
 }

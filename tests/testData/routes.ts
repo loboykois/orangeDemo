@@ -1,4 +1,15 @@
 export enum routes {
-  authentication = "web/index.php/auth/login",
-  dashboard = "web/index.php/dashboard/index",
+  authentication = "/web/index.php/auth/login",
+  admin = "/web/index.php/admin/viewSystemUsers",
+  pim = "/web/index.php/pim/viewEmployeeList",
+  leave = "/web/index.php/leave/viewLeaveList",
+  time = "/web/index.php/time/viewEmployeeTimesheet",
+  recruitment = "/web/index.php/recruitment/viewCandidates",
+  myInfo = "/web/index.php/pim/viewPersonalDetails/empNumber",
+  performance = "/web/index.php/performance/searchEvaluatePerformanceReview",
+  dashboard = "/web/index.php/dashboard/index",
+  directory = "/web/index.php/directory/viewDirectory",
+  maintenance = "/web/index.php/maintenance/purgeEmployee",
+  claim = "/web/index.php/claim/viewAssignClaim",
+  buzz = "/web/index.php/buzz/viewBuzz",
 }
