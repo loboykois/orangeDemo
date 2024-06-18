@@ -1,4 +1,5 @@
 export enum routes {
+  basePage = "https://www.orangehrm.com/",
   authentication = "/web/index.php/auth/login",
   admin = "/web/index.php/admin/viewSystemUsers",
   pim = "/web/index.php/pim/viewEmployeeList",

@@ -7,7 +7,9 @@
   "scripts": {
     "prettier": "npx prettier . --write",
     "lint": "npx eslint .",
-    "test": "npx run test",
+    "test": "npx playwright test",
+    "serial": "npx playwright test --workers=1",
+    "report": "npx playwright show-report",
     "report": "npx playwright show-report",
     "ui-mode": "npx playwright test --ui",
     "codegen": "npx playwright codegen"
