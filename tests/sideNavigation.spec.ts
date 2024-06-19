@@ -15,6 +15,8 @@ test.describe("Side navigation test >>>", () => {
     test(`Should navigate to ${tab.tabName} page when user clicked at ${tab.tabName} tab at the Side navigation bar`, async ({ page, dashboardPage }) => {
       await dashboardPage.sideNavigation.navigateTo(tab.tabName);
 
+      await page.waitForURL(`${tab.tabRoute}`);
+
       await expect(page).toHaveURL(`${tab.tabRoute}`);
     });
   }
@@ -26,19 +28,12 @@ test.describe("Side navigation test >>>", () => {
   });
 
   test("Should hide/show Side navigation bar when menu button was clicked", async ({ page, dashboardPage }) => {
-    const banner = page.locator(".oxd-brand-banner img");
-    const bannerWight = await banner.evaluate((el) => {
-      return window.getComputedStyle(el).getPropertyValue("width");
-    });
-
     await dashboardPage.sideNavigation.hideSideNavigation();
-    await expect(page.locator(".oxd-brand")).toHaveClass("oxd-brand toggled");
-
-    expect(bannerWight).toBe("182px");
+    await expect(page.locator(".oxd-brand-banner")).toHaveClass("oxd-brand-banner toggled");
+    await expect(page.locator(".oxd-brand-logo")).toHaveCSS("display", "block");
 
     await dashboardPage.sideNavigation.showSideNavigation();
-    await expect(page.locator(".oxd-brand")).not.toHaveClass("toggled");
-
-    expect(bannerWight).toBe("50px");
+    await expect(page.locator(".oxd-brand-banner")).not.toHaveClass("oxd-brand-banner toggled");
+    await expect(page.locator(".oxd-brand-logo")).toHaveCSS("display", "none");
   });
 });
