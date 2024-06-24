@@ -37,3 +37,5 @@ test.describe("Side navigation test >>>", () => {
     await expect(page.locator(".oxd-brand-logo")).toHaveCSS("display", "none");
   });
 });
+
+// TODO: add tests for search in Side navigation panel

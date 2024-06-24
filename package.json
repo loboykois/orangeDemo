@@ -11,7 +11,8 @@
     "serial": "npx playwright test --workers=1",
     "report": "npx playwright show-report",
     "ui-mode": "npx playwright test --ui",
-    "codegen": "npx playwright codegen"
+    "codegen": "npx playwright codegen",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
@@ -25,8 +26,13 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-playwright": "^1.6.2",
     "globals": "^15.4.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
     "prettier": "3.3.1",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.13.0"
+  },
+  "lint-staged": {
+    "*/**/*.{js,ts}": "prettier --write --ignore-unknown"
   }
 }
