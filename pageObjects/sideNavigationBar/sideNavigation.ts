@@ -18,4 +18,8 @@ export class SideNavigation {
   public async hideSideNavigation(): Promise<void> {
     await this.page.locator(".bi-chevron-left").click();
   }
+
+  public async search(text: string): Promise<void> {
+    await this.page.getByPlaceholder("Search").fill(text);
+  }
 }
