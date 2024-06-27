@@ -3,21 +3,21 @@ import { test } from "../pageObjects/customFixtures";
 import { sideNavigationTabs } from "../pageObjects/sideNavigationBar/sideNavigation.model";
 import { validCredentials } from "./testData/credentials";
 import { routes } from "./testData/routes";
-import exp from "constants";
 
-// test.describe.configure({ mode: "serial" });
+test.describe.configure({ mode: "serial" });
+
 test.describe("Side navigation test >>>", () => {
-  test.beforeEach(async ({ loginPage }) => {
+  test.beforeEach(async ({ page, loginPage }) => {
     await loginPage.navigate();
+    await page.waitForTimeout(500);
     await loginPage.doLogin(validCredentials.username, validCredentials.password);
+    await page.waitForTimeout(1000);
   });
 
   for (const tab of sideNavigationTabs) {
     test(`Should navigate to ${tab.tabName} page when user clicked at ${tab.tabName} tab at the Side navigation bar`, async ({ page, dashboardPage }) => {
       await dashboardPage.sideNavigation.navigateTo(tab.tabName);
-
       await page.waitForURL(`${tab.tabRoute}`);
-
       await expect(page).toHaveURL(`${tab.tabRoute}`);
     });
   }
