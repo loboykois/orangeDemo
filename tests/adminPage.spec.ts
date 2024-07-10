@@ -1,7 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../pageObjects/customFixtures";
 import { validCredentials } from "./testData/credentials";
-import exp from "constants";
 
 test.describe("System users table filter tests", () => {
   test.beforeEach(async ({ page, loginPage }) => {
