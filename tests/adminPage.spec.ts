@@ -1,6 +1,7 @@
 import { expect } from "@playwright/test";
 import { test } from "../pageObjects/customFixtures";
 import { validCredentials } from "./testData/credentials";
+import exp from "constants";
 
 test.describe("System users table filter tests", () => {
   test.beforeEach(async ({ page, loginPage }) => {
@@ -33,5 +34,18 @@ test.describe("System users table filter tests", () => {
     const userRole = await page.locator(".oxd-table-cell").nth(2).all();
 
     expect(userRole.length).toBeGreaterThanOrEqual(1);
+  });
+
+  test("Should display a match in the list when the user enters a value in the employee name field", async ({ page, adminPage }) => {
+    await adminPage.navigate();
+
+    await adminPage.systemUsers.fillEmployeeName("J");
+
+    await page.waitForTimeout(1500);
+
+    // TODO: filter array of locators and find matches
+    // const dropdownOptions = await page.getByRole("option").all();
+
+    await expect(page.locator("span").getByText("James Butler")).toBeVisible();
   });
 });
