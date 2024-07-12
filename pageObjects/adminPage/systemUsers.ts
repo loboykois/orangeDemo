@@ -14,8 +14,6 @@ export class SystemUsers {
   public async fillEmployeeName(employeeName: string): Promise<void> {
     await this.form.getByPlaceholder("Type for hints...").click();
     await this.form.getByPlaceholder("Type for hints...").fill(employeeName);
-    // await this.page.getByPlaceholder("Type for hints...").click();
-    // await this.page.getByPlaceholder("Type for hints...").fill(employeeName);
   }
 
   public async selectRole(role: string): Promise<void> {
@@ -25,7 +23,7 @@ export class SystemUsers {
 
   public async selectStatus(status: string): Promise<void> {
     await this.form.locator(".oxd-select-text--after").last().click();
-    await this.form.locator(".oxd-select-option").getByText(status).click();
+    await this.form.locator(".oxd-select-option").getByRole("option", { name: status });
   }
 
   public buttonController() {

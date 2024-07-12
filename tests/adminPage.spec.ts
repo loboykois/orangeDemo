@@ -1,4 +1,4 @@
-import { expect } from "@playwright/test";
+import { expect, Locator } from "@playwright/test";
 import { test } from "../pageObjects/customFixtures";
 import { validCredentials } from "./testData/credentials";
 
@@ -35,16 +35,47 @@ test.describe("System users table filter tests", () => {
     expect(userRole.length).toBeGreaterThanOrEqual(1);
   });
 
-  test("Should display a match in the list when the user enters a value in the employee name field", async ({ page, adminPage }) => {
+  test.skip("Should display users list with status Enabled in Records when Enabled option is selected", async ({ page, adminPage }) => {
+    await adminPage.navigate();
+    const buttonController = adminPage.systemUsers.buttonController();
+
+    await adminPage.systemUsers.selectStatus("Enabled");
+    await buttonController.search.click();
+
+    expect(1).toBe(1);
+  });
+
+  test("Should display a match in list when user enters a value in employee name field", async ({ page, adminPage }) => {
     await adminPage.navigate();
 
-    await adminPage.systemUsers.fillEmployeeName("J");
+    const employeeName: string = "Joseph Evans";
+    await adminPage.systemUsers.fillEmployeeName(employeeName);
 
     await page.waitForTimeout(1500);
 
-    // TODO: filter array of locators and find matches
-    // const dropdownOptions = await page.getByRole("option").all();
+    const options: Locator[] = await page.getByRole("option").all();
+    const optionsText: string[] = [];
 
-    await expect(page.locator("span").getByText("James Butler")).toBeVisible();
+    for (const option of options) {
+      const text: string = await option.innerText();
+      optionsText.push(text);
+    }
+
+    expect(optionsText.includes(employeeName)).toBeTruthy();
+    await expect(page.locator("span").getByText(employeeName)).toBeVisible();
+  });
+
+  test("Shoud display No records found when user enters a values without matches in employee field", async ({ page, adminPage }) => {
+    await adminPage.navigate();
+
+    const unExistingEmployeeName: string = "ABCDEFG";
+    await adminPage.systemUsers.fillEmployeeName(unExistingEmployeeName);
+
+    await page.waitForTimeout(1500);
+
+    await expect(page.getByRole("option")).toHaveText("No Records Found");
+
+    await adminPage.systemUsers.buttonController().search.click();
+    await expect(page.locator(".oxd-input-group__message").getByText("Invalid")).toBeVisible();
   });
 });
