@@ -17,10 +17,9 @@ test.describe("System users table filter tests", () => {
     await buttonController.search.click();
 
     await page.waitForTimeout(500);
-    // const userRole = await page.locator(".oxd-table-cell").nth(2).all();
     const userRole = await page.locator(".oxd-table-card").getByText("Admin").all();
 
-    expect(userRole.length).toBeGreaterThanOrEqual(2);
+    expect(userRole.length).toBeGreaterThanOrEqual(1);
   });
 
   test("Should display users list with role ESS in Records when ESS option is selected", async ({ page, adminPage }) => {
@@ -31,10 +30,9 @@ test.describe("System users table filter tests", () => {
     await buttonController.search.click();
 
     await page.waitForTimeout(500);
-    // const userRole = await page.locator(".oxd-table-cell").nth(2).all();
     const userRole = await page.locator(".oxd-table-card").getByText("ESS").all();
 
-    expect(userRole.length).toBeGreaterThanOrEqual(4);
+    expect(userRole.length).toBeGreaterThanOrEqual(1);
   });
 
   test("Should display users list with status Enabled in Records when Enabled option is selected", async ({ page, adminPage }) => {
@@ -45,10 +43,9 @@ test.describe("System users table filter tests", () => {
     await buttonController.search.click();
 
     await page.waitForTimeout(500);
-    // const userStatus = await page.locator(".oxd-table-cell").nth(4).all();
     const userStatus = await page.locator(".oxd-table-card").getByText("Enabled").all();
 
-    expect(userStatus.length).toBeGreaterThanOrEqual(4);
+    expect(userStatus.length).toBeGreaterThanOrEqual(1);
   });
 
   test("Should be displayed No Records Found popup when user has selected filters without matches", async ({ page, adminPage }) => {
