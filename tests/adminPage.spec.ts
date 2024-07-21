@@ -1,16 +1,12 @@
 import { expect, Locator } from "@playwright/test";
 import { test } from "../pageObjects/customFixtures";
-import { validCredentials } from "./testData/credentials";
 
-test.describe("System users table filter tests", () => {
-  test.beforeEach(async ({ page, loginPage }) => {
-    await loginPage.navigate();
+test.describe("System users tests", () => {
+  test.beforeEach(async ({ page, adminPage }) => {
+    await adminPage.navigate();
     await page.waitForTimeout(500);
-    await loginPage.doLogin(validCredentials.username, validCredentials.password);
-    await page.waitForTimeout(1000);
   });
   test("Should display users list with role Admin in Records when Admin option is selected", async ({ page, adminPage }) => {
-    await adminPage.navigate();
     const buttonController = adminPage.systemUsers.buttonController();
 
     await adminPage.systemUsers.selectRole("Admin");
@@ -23,7 +19,6 @@ test.describe("System users table filter tests", () => {
   });
 
   test("Should display users list with role ESS in Records when ESS option is selected", async ({ page, adminPage }) => {
-    await adminPage.navigate();
     const buttonController = adminPage.systemUsers.buttonController();
 
     await adminPage.systemUsers.selectRole("ESS");
@@ -36,7 +31,6 @@ test.describe("System users table filter tests", () => {
   });
 
   test("Should display users list with status Enabled in Records when Enabled option is selected", async ({ page, adminPage }) => {
-    await adminPage.navigate();
     const buttonController = adminPage.systemUsers.buttonController();
 
     await adminPage.systemUsers.selectStatus("Enabled");
@@ -49,7 +43,6 @@ test.describe("System users table filter tests", () => {
   });
 
   test("Should be displayed No Records Found popup when user has selected filters without matches", async ({ page, adminPage }) => {
-    await adminPage.navigate();
     const buttonController = adminPage.systemUsers.buttonController();
 
     await adminPage.systemUsers.selectStatus("Disabled");
@@ -62,8 +55,6 @@ test.describe("System users table filter tests", () => {
   });
 
   test("Should display a match in list when user enters a value in employee name field", async ({ page, adminPage }) => {
-    await adminPage.navigate();
-
     const employeeName: string = "Joseph Evans";
     await adminPage.systemUsers.fillEmployeeName(employeeName);
 
@@ -82,8 +73,6 @@ test.describe("System users table filter tests", () => {
   });
 
   test("Should display No records found when user enters a values without matches in employee field", async ({ page, adminPage }) => {
-    await adminPage.navigate();
-
     const unExistingEmployeeName: string = "ABCDEFG";
     await adminPage.systemUsers.fillEmployeeName(unExistingEmployeeName);
 
@@ -96,7 +85,6 @@ test.describe("System users table filter tests", () => {
   });
 
   test("Should be displayed default values in filters when user has clicked on reset button", async ({ page, adminPage }) => {
-    await adminPage.navigate();
     const buttonController = adminPage.systemUsers.buttonController();
     const filters = adminPage.systemUsers.filters();
 

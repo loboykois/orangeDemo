@@ -3,9 +3,12 @@ import { test } from "../pageObjects/customFixtures";
 import { invalidCredentials, validCredentials } from "./testData/credentials";
 import { routes } from "./testData/routes";
 
-test.describe("Login page tests >>>", () => {
-  test.beforeEach(async ({ loginPage }) => {
+test.use({ storageState: { cookies: [], origins: [] } });
+
+test.describe("Login tests >>>", () => {
+  test.beforeEach(async ({ page, loginPage }) => {
     await loginPage.navigate();
+    await page.waitForTimeout(500);
   });
 
   test("should redirect to dashboard page when user entered correct credentials", async ({ page, loginPage }) => {

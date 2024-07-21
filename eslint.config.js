@@ -13,7 +13,8 @@ export default tseslint.config(
   },
   {
     rules: {
-      // "require-await": "error",
+      "playwright/no-wait-for-timeout": "off",
+      "playwright/no-standalone-expect": "off",
     },
   },
 );
